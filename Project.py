@@ -111,7 +111,9 @@ if analyze_btn:
             fig_line.add_hline(y=1,line_dash="dash", line_color="#2ECC71", annotation_text="Max Bullish")
             fig_line.add_hline(y=-1,line_dash="dash", line_color="#E74C3C", annotation_text="Max Bearish")
             fig_line.update_layout(yaxis_range=[-1.1, 1.1])
-            st.plotly_chart(fig_line, use_container_width=True,config={"staticPlot": False, "displayModeBar": False, "scrollZoom": False})
+            fig_line.update_xaxes(fixdrange=True)
+            fig_line.update_yaxes(fixdrange=True)
+            st.plotly_chart(fig_line, use_container_width=True,config={"displayModeBar": False})
 
         with tab2:
             st.subheader("Sentiment Distribution")
@@ -130,6 +132,7 @@ if analyze_btn:
 
     except Exception as e:
         st.error(f"Error: {e}")
+
 
 
 
