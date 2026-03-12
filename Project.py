@@ -32,8 +32,10 @@ with st.sidebar:
     st.markdown("---")
 
     st.write("**Developed by:**")
-    st.write("Mandar Dada Ghule & 
-              Atharva Koditkar")
+    st.write("Mandar Dada Ghule")
+    st.write("Atharva Koditkar")
+
+    st.markdown("---")
 
 # ---3.Main Header---
 st.title(f"📊 Sentiment Analysis: {query}")
@@ -128,5 +130,6 @@ if analyze_btn:
 
     except Exception as e:
         st.error(f"Error: {e}")
+
 
 
