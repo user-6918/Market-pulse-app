@@ -32,7 +32,7 @@ with st.sidebar:
     st.markdown("---")
 
     st.write("**Developed by:**")
-    st.write("Mandar Dada Ghule")
+    st.write("Mandar Dada Ghule #euu..")
     st.write("Atharva Koditkar")
 
     st.markdown("---")
