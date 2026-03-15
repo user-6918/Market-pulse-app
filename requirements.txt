@@ -1,5 +1,7 @@
 streamlit
 pandas
-nltk
-newsapi-python
 plotly
+newsapi-python
+transformers
+torch
+numpy
