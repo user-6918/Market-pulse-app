@@ -99,7 +99,6 @@ if st.session_state.get("full_analysis_df") is None:
                 texts_to_analyze = [f"{a['title']}. {a['description']}" for a in raw_articles]
                 
                 st.write(f"🧠 Running FinBERT AI on {len(texts_to_analyze)} headlines...")
-                # Repaired: Added batch_size and fixed variable name 'raw_articles'
                 sentiment_results = process_batch_sentiment(texts_to_analyze, batch_size=5)
 
                 processed = []
@@ -123,7 +122,6 @@ if st.session_state.get("full_analysis_df") is None:
 # --- 📊 SECTION 6: INSTANT FILTERING & DASHBOARD ---
 if st.session_state.get('full_analysis_df') is not None:
     full_df = st.session_state['full_analysis_df']
-    # Instant filtering logic based on the slider value
     cutoff_date = datetime.now() - timedelta(days=lookback)
     df = full_df[full_df['Date'] >= cutoff_date].copy()
 
@@ -150,7 +148,13 @@ if st.session_state.get('full_analysis_df') is not None:
             fig_line.add_hline(y=0, line_dash="dash", line_color="gray")
             fig_line.add_hline(y=1, line_dash="dash", line_color="green")
             fig_line.add_hline(y=-1, line_dash="dash", line_color="red")
-            fig_line.update_layout(yaxis_range=[-1.1, 1.1],xaxis_fixedrange=True,yaxis_fixedrange=True, xaxis_title="Date", yaxis_title="Average Sentiment Score")
+            fig_line.update_layout(
+                yaxis_range=[-1.1, 1.1],
+                xaxis_fixedrange=True,
+                yaxis_fixedrange=True,
+                xaxis_title="Date",
+                yaxis_title="Average Sentiment Score"
+            )
             st.plotly_chart(fig_line, use_container_width=True, config={"displayModeBar": False})
 
         with tab2:
@@ -167,3 +171,25 @@ if st.session_state.get('full_analysis_df') is not None:
                 with st.expander(f"{icon} {row['Title']}"):
                     st.write(f"**🏢 Source:** {row['Source']} | **📅 Date:** {row['Date'].date()}")
                     st.write(f"🔗 [Read Full Article]({row['Link']})")
+
+        # --- 📄 SECTION 7: PDF EXPORT ---
+        from fpdf import FPDF
+
+        def create_pdf(df):
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+
+            pdf.cell(200, 10, txt="Market Pulse Pro - Sentiment Analysis", ln=True, align="C")
+            pdf.ln(10)
+
+            # Table headers
+            pdf.set_font("Arial", 'B', 10)
+            pdf.cell(40, 10, "Date", 1)
+            pdf.cell(80, 10, "Title", 1)
+            pdf.cell(30, 10, "Sentiment", 1)
+            pdf.cell(30, 10, "Score", 1)
+            pdf.ln()
+
+            # Table rows
+            pdf.set_font("Arial
