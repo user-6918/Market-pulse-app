@@ -150,7 +150,7 @@ if st.session_state.get('full_analysis_df') is not None:
             fig_line.add_hline(y=0, line_dash="dash", line_color="gray")
             fig_line.add_hline(y=1, line_dash="dash", line_color="green")
             fig_line.add_hline(y=-1, line_dash="dash", line_color="red")
-            fig_line.update_layout(yaxis_range=[-1.1, 1.1],xaxis_fixedrange=True,yaxis_fixedrange=True)
+            fig_line.update_layout(yaxis_range=[-1.1, 1.1],xaxis_fixedrange=True,yaxis_fixedrange=True, xaxis_title="Date", yaxis_title="Average Sentiment Score")
             st.plotly_chart(fig_line, use_container_width=True, config={"displayModeBar": False})
 
         with tab2:
