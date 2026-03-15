@@ -192,4 +192,4 @@ if st.session_state.get('full_analysis_df') is not None:
             pdf.ln()
 
             # Table rows
-            pdf.set_font("Arial
+            pdf.set_font("Arial", size=10)
