@@ -145,7 +145,7 @@ if st.session_state.get('full_analysis_df') is not None:
         
         with tab1:
             st.subheader("Sentiment Trend (Timeline)")
-            trend_df = display_df.groupby('Date')['Score'].mean().reset_index()
+            trend_df = display_df.groupby('Date_Str')['Score'].mean().reset_index()
             fig_line = px.line(trend_df, x='Date', y='Score', template="plotly_dark", markers=True)
             fig_line.add_hline(y=0, line_dash="dash", line_color="gray")
             fig_line.add_hline(y=1, line_dash="dash", line_color="green")
