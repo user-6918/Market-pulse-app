@@ -141,15 +141,17 @@ if st.session_state.get('full_analysis_df') is not None:
         m2.metric("🔮 Market Mood", mood)
         m3.metric("📝 Articles in Window", len(display_df))
 
-        tab1, tab2, tab3 = st.tabs(["📈 Momentum Trend", "📊 Distribution", "📰 Intelligence Feed"])
+        tab1, tab2, tab3 = st.tabs(["📈 Momentum Trend", "📊 Distribution", "📰 News Feed"])
         
         with tab1:
             st.subheader("Sentiment Trend (Timeline)")
             trend_df = display_df.groupby('Date_Str')['Score'].mean().reset_index()
             fig_line = px.line(trend_df, x='Date_Str', y='Score', template="plotly_dark", markers=True)
             fig_line.add_hline(y=0, line_dash="dash", line_color="gray")
+            fig_line.add_hline(y=1, line_dash="dash", line_color="green")
+            fig_line.add_hline(y=-1, line_dash="dash", line_color="red")
             fig_line.update_layout(yaxis_range=[-1.1, 1.1])
-            st.plotly_chart(fig_line, use_container_width=True)
+            st.plotly_chart(fig_line, use_container_width=True, config={"displayModeBar": False}, config={"staticPlot": True})
 
         with tab2:
             st.subheader("Sentiment Volume Split")
