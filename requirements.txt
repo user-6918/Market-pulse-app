@@ -5,3 +5,4 @@ newsapi-python
 transformers
 torch
 numpy
+yfinance
