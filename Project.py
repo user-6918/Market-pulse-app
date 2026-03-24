@@ -191,7 +191,7 @@ def show_live_kpis(query_val, avg_score, article_count):
         st.metric("🔮 Market Mood", mood)
     with m3:
         st.metric("📝 Articles", article_count)
-    st.caption(f"Last Price Sync: {datetime.now().strftime('%H:%M:%S')} (Auto-refreshes every 15s)")
+    st.caption(f"Last Price Sync: {datetime.now().strftime('%M:%S')} (Auto-refreshes every 15s)")
 
 # 🖼️ DATA VISUALIZATION DASHBOARD ---------------------------------------------
 
